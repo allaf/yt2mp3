@@ -1,0 +1,37 @@
+{
+  "manifest_version": 2,
+  "name": "convert2mp3.net",
+  "version": "0.3",
+  "description": "Automatically download and convert videos with convert2mp3.net",
+  
+  "applications": {
+    "gecko": {
+      "id": "yt2mp3@alex",
+      "strict_min_version": "48.0"
+    }
+  },
+  
+  "permissions": [
+  	"<all_urls>",
+    "tabs",
+    "activeTab",
+    "webRequest"
+  ],
+  
+  "page_action": {
+    "default_icon": "icons/yt2mp3.jpg",
+    "default_title": "Convert to audio",
+    "default_popup": "popup/choose_format.html"
+  },
+  
+  "background": {
+    "scripts": ["background.js"]
+  },
+  
+  "content_scripts": [    
+    {
+      "matches": ["http://convert2mp3.net/en/index.php?p=complete*"],
+      "js": ["jquery.js", "content_script_dl.js"]
+    }
+  ]
+}

@@ -1,12 +1,15 @@
+"use strict";
 
-$(function() {
-  // click download button
-  $('a.btn.btn-success')[0].click();
+browser.runtime.sendMessage({
+  query : 'clickDownload'
+}).then(res => {
+  if (res) {
+    document.querySelector('a.btn.btn-success').click();
 
-  // close tab
-  browser.runtime.sendMessage({
-    query : 'closeTab'
-  });
+    // close tab
+    browser.runtime.sendMessage({
+      query : 'closeTab'
+    });
+  }
 });
-
 

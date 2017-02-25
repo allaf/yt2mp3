@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "convert2mp3.net",
-  "version": "0.4",
+  "version": "0.1",
   "description": "Automatically download and convert videos with convert2mp3.net",
   
   "applications": {
@@ -11,10 +11,7 @@
   },
   
   "permissions": [
-  	"<all_urls>",
     "tabs",
-    "activeTab",
-    "webRequest",
   	"storage"
   ],
   
@@ -31,7 +28,7 @@
   "content_scripts": [    
     {
       "matches": ["http://convert2mp3.net/en/index.php?p=complete*"],
-      "js": ["jquery.js", "content_script_dl.js"]
+      "js": ["content_script_dl.js"]
     }
   ],
   

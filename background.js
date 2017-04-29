@@ -2,7 +2,6 @@
 
 var urlConvert = 'http://convert2mp3.net/en/index.php?p=call&';
 
-var vimeo = /https:\/\/vimeo.com\/\d+/i;
 var youtube = /^https?:\/\/www.youtube.com\/watch/i;
 var dm = /^https?:\/\/www.dailymotion.com\/video/i;
 
@@ -10,7 +9,7 @@ var tabs = {};
 
 // show extension
 browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-  if (tab.url.match(youtube) || tab.url.match(vimeo) || tab.url.match(dm)) {
+  if (tab.url.match(youtube) || tab.url.match(dm)) {
     browser.pageAction.show(tab.id);
   }
 });
@@ -38,9 +37,11 @@ function handleMessage(request, sender, sendResponse) {
     delete tabs[sender.tab.id];
     browser.storage.local.get('close-tab').then((res) => {
       if (res['close-tab']) {
-        setTimeout(function(){
-          browser.tabs.remove(sender.tab.id);
-        }, 3000);
+        browser.storage.local.get('close-tab-delay').then((delay) => {
+          setTimeout(function(){
+            browser.tabs.remove(sender.tab.id);
+          }, delay['close-tab-delay']*1000);
+        });
       }
     });
   }
@@ -51,6 +52,13 @@ function defaultOptions() {
     if (res['close-tab'] === undefined) {
       browser.storage.local.set({
         'close-tab': true
+      });
+    }
+  });
+  browser.storage.local.get('close-tab-delay').then((res) => {
+    if (res['close-tab-delay'] === undefined) {
+      browser.storage.local.set({
+        'close-tab-delay': 3
       });
     }
   });

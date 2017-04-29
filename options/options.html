@@ -10,11 +10,16 @@
     <fieldset>
       <legend>Options</legend>
       <label for="close-tab">Close the convert2mp3.net tab</label>
-      <input type="checkbox" id="close-tab" >
-      <br><br><br>
+      <input type="checkbox" id="close-tab"> 
+      <br>
+
+      <span id="close-tab-delay-zone">
+        <label for="close-tab-delay">after </label> 
+        <input id="close-tab-delay" type="number" min="0" max="999" value="3" style="width: 3em"> seconds
+      </span>
+      <br>
       <button type="submit">Save</button>
     </fieldset>
   </form>
   <script src="options.js"></script>
 </body>
-

@@ -4,12 +4,13 @@ var urlConvert = 'http://convert2mp3.net/en/index.php?p=call&';
 
 var youtube = /^https?:\/\/www.youtube.com\/watch/i;
 var dm = /^https?:\/\/www.dailymotion.com\/video/i;
-
+var clipfish=/^https?:\/\/www.clipfish.de\/.*\/video\//i;
+ 
 var tabs = {};
 
 // show extension
 browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-  if (tab.url.match(youtube) || tab.url.match(dm)) {
+  if (tab.url.match(youtube) || tab.url.match(dm) || tab.url.match(clipfish)) {
     browser.pageAction.show(tab.id);
   }
 });

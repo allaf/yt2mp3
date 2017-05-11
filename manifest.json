@@ -12,11 +12,18 @@
   
   "permissions": [
     "tabs",
-  	"storage"
+  	"storage",
+  	"contextMenus"
   ],
   
+  "icons": {
+    "16": "icons/favicon.png",
+    "32": "icons/favicon.png",
+    "48": "icons/favicon.png"
+  },
+  
   "page_action": {
-    "default_icon": "icons/yt2mp3.jpg",
+    "default_icon": "icons/favicon.png",
     "default_title": "Convert to audio",
     "default_popup": "popup/popup.html"
   },

@@ -1,5 +1,55 @@
 "use strict";
 
+/*
+Create all the context menu items.
+*/
+var ytUrlPattern = "https://www.youtube.com/watch?v=*";
+var dmUrlPattern = "http://www.dailymotion.com/video/*";
+var clipFishUrlPattern = "http://www.clipfish.de/*/video/*";
+var urlPatterns = [ytUrlPattern, dmUrlPattern, clipFishUrlPattern];
+
+function addMenuEntry(id) {
+  browser.contextMenus.create({
+    id: id,
+    title: id,
+    contexts: ["link"],
+    targetUrlPatterns: urlPatterns
+  });
+}
+
+function addAllEntries() {  
+  addMenuEntry("aac");
+  addMenuEntry("m4a");
+  addMenuEntry("mp3");
+  
+  browser.contextMenus.create({
+    id: "sep",
+    type: "separator",
+    contexts: ["link"],
+    targetUrlPatterns: urlPatterns
+  });
+  
+  addMenuEntry("mp4");
+}
+
+addAllEntries();
+
+browser.contextMenus.onClicked.addListener(function(info, tab) {
+  switch (info.menuItemId) {
+    case "aac":
+    case "m4a":
+    case "mp3":
+    case "mp4":
+      createTab({
+        format: info.menuItemId,
+        url: info.linkUrl
+      });
+      break;
+  }
+});
+
+
+//////////////////////////////////
 var urlConvert = 'http://convert2mp3.net/en/index.php?p=call&';
 
 var youtube = /^https?:\/\/www.youtube.com\/watch/i;
@@ -16,8 +66,9 @@ browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 });
 
 var createTab = function(opts) {
+  var cleanUrl = opts.url.replace(/time_continue=\d+&/,'');
   browser.tabs.create({
-    url : urlConvert+'format='+opts.format+'&url='+opts.url
+    url : urlConvert+'format='+opts.format+'&url='+cleanUrl
   }).then(res => {
     tabs[res.id] = {};
   })

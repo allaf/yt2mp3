@@ -68,7 +68,8 @@ browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 var createTab = function(opts) {
   var cleanUrl = opts.url.replace(/time_continue=\d+&/,'');
   browser.tabs.create({
-    url : urlConvert+'format='+opts.format+'&url='+cleanUrl
+    url : urlConvert+'format='+opts.format+'&url='+cleanUrl,
+    active: false
   }).then(res => {
     tabs[res.id] = {};
   })

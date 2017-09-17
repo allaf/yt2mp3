@@ -3,7 +3,8 @@
 var saveOptions = function(e) {
   browser.storage.local.set({
     'close-tab': document.querySelector('#close-tab').checked,
-    'close-tab-delay': document.querySelector('#close-tab-delay').value
+    'close-tab-delay': document.querySelector('#close-tab-delay').value,
+    'dropbox': document.querySelector('#dropbox').checked,
   });
   e.preventDefault();
 }
@@ -17,6 +18,10 @@ var restoreOptions = function() {
   
   browser.storage.local.get('close-tab-delay').then((res) => {    
     document.querySelector('#close-tab-delay').value = res['close-tab-delay']!==undefined ? res['close-tab-delay']: 3;
+  });
+  
+  browser.storage.local.get('dropbox').then((res) => {
+    document.querySelector('#dropbox').checked = res['dropbox']!==undefined ? res['dropbox']: true;
   });
   
 }

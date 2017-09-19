@@ -21,7 +21,7 @@ var restoreOptions = function() {
   });
   
   browser.storage.local.get('dropbox').then((res) => {
-    document.querySelector('#dropbox').checked = res['dropbox']!==undefined ? res['dropbox']: true;
+    document.querySelector('#dropbox').checked = res['dropbox']!==undefined ? res['dropbox']: false;
   });
   
 }

@@ -18,9 +18,12 @@ function addMenuEntry(id) {
 }
 
 function addAllEntries() {  
-  addMenuEntry("aac");
-  addMenuEntry("m4a");
   addMenuEntry("mp3");
+  addMenuEntry("m4a");
+  addMenuEntry("aac");
+  addMenuEntry("flac");
+  addMenuEntry("ogg");
+  addMenuEntry("wma");
   
   browser.contextMenus.create({
     id: "sep",
@@ -29,6 +32,9 @@ function addAllEntries() {
     targetUrlPatterns: urlPatterns
   });
   
+  addMenuEntry("avi");
+  addMenuEntry("wmv");
+  addMenuEntry("3gp");
   addMenuEntry("mp4");
 }
 
@@ -36,10 +42,16 @@ addAllEntries();
 
 browser.contextMenus.onClicked.addListener(function(info, tab) {
   switch (info.menuItemId) {
-    case "aac":
-    case "m4a":
     case "mp3":
+    case "m4a":
+    case "aac":
+    case "flac":
+    case "ogg":
+    case "wma":
     case "mp4":
+    case "avi":
+    case "wmv":
+    case "3gp":
       createTab({
         format: info.menuItemId,
         url: info.linkUrl

@@ -4,9 +4,10 @@ html, body {
 
 .button {
   margin: 3% auto;
-  padding: 4px;
-  text-align: center;
-  font-size: 1.5em;
+  margin-left: 15px;
+  padding: 2px;
+  text-align: left;
+  font-size: 1em;
   cursor: pointer;
 }
 

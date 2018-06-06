@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "convert2mp3.net",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "Automatically download and convert videos with convert2mp3.net",
   
   "applications": {

@@ -8,10 +8,10 @@ var dmUrlPattern = "http://www.dailymotion.com/video/*";
 var clipFishUrlPattern = "http://www.clipfish.de/*/video/*";
 var urlPatterns = [ytUrlPattern, dmUrlPattern, clipFishUrlPattern];
 
-function addMenuEntry(id) {
+function addMenuEntry(id, title) {
   browser.contextMenus.create({
     id: id,
-    title: id,
+    title: title ? title : id,
     contexts: ["link"],
     targetUrlPatterns: urlPatterns
   });
@@ -36,24 +36,34 @@ function addAllEntries() {
   addMenuEntry("wmv");
   addMenuEntry("3gp");
   addMenuEntry("mp4");
+  addMenuEntry("mp4_1080", "mp4 (1080p)");
 }
 
 addAllEntries();
 
+
 browser.contextMenus.onClicked.addListener(function(info, tab) {
   switch (info.menuItemId) {
-    case "mp3":
     case "m4a":
     case "aac":
     case "flac":
     case "ogg":
     case "wma":
-    case "mp4":
     case "avi":
     case "wmv":
     case "3gp":
+    case "mp4":
+    case "mp3":
       createTab({
+        quality: "",
         format: info.menuItemId,
+        url: info.linkUrl
+      });
+      break;
+    case "mp4_1080":
+      createTab({
+        quality: "1080",
+        format: "mp4",
         url: info.linkUrl
       });
       break;
@@ -66,7 +76,7 @@ var urlConvert = 'http://convert2mp3.net/en/index.php?p=call&';
 
 var youtube = /^https?:\/\/www.youtube.com\/watch/i;
 var dm = /^https?:\/\/www.dailymotion.com\/video/i;
-var clipfish=/^https?:\/\/www.clipfish.de\/.*\/video\//i;
+var clipfish = /^https?:\/\/www.clipfish.de\/.*\/video\//i;
  
 var tabs = {};
 
@@ -78,9 +88,10 @@ browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 });
 
 var createTab = function(opts) {
-  var cleanUrl = opts.url.replace(/time_continue=\d+&/,'');
+  var cleanUrl = opts.url.replace(/time_continue=\d+&/, '');
+  var format = opts.format
   browser.tabs.create({
-    url : urlConvert+'format='+opts.format+'&url='+cleanUrl,
+    url : urlConvert+'format='+opts.format+'&quality='+opts.quality+'&url='+cleanUrl,
     active: false
   }).then(res => {
     tabs[res.id] = {};

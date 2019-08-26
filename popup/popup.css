@@ -1,20 +1,11 @@
 html, body {
-  width: 100px;
+  width: auto;
 }
 
-.button {
-  margin: 3% auto;
-  margin-left: 15px;
-  padding: 2px;
-  text-align: left;
-  font-size: 1em;
-  cursor: pointer;
+ul {
+  list-style: none;
 }
 
-.format:hover {
-  background-color: #CFF2F2;
-}
-
-.format {
-  background-color: #E5F2F2;
+li:hover {
+  font-weight: bold;
 }

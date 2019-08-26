@@ -1,19 +1,20 @@
 {
   "manifest_version": 2,
-  "name": "convert2mp3.net",
-  "version": "0.4.5",
-  "description": "Automatically download and convert videos with convert2mp3.net",
+  "name": "downlod youtube video with rapidapi.com",
+  "version": "0.5",
+  "description": "Download and convert youtube videos with getvideo.p.rapidapi.com",
   
   "applications": {
     "gecko": {
-      "strict_min_version": "48.0"
+      "strict_min_version": "54.0"
     }
   },
   
   "permissions": [
-    "tabs",
   	"storage",
-  	"contextMenus","downloads","downloads.open"
+  	"contextMenus",
+    "downloads",
+    "downloads.open"
   ],
   
   "icons": {
@@ -21,25 +22,18 @@
     "32": "icons/favicon.png",
     "48": "icons/favicon.png"
   },
-  
+
   "page_action": {
     "default_icon": "icons/favicon.png",
-    "default_title": "Convert to audio",
+    "default_title": "Convert/download",
     "default_popup": "popup/popup.html"
   },
   
   "background": {
     "scripts": ["background.js"]
   },
-  
-  "content_scripts": [    
-    {
-      "matches": ["http://convert2mp3.net/en/index.php?p=complete*"],
-      "js": ["content_script_dl.js"]
-    }
-  ],
-  
+
   "options_ui": {
-  	"page": "options/options.html"
+    "page": "options/options.html"
   }
 }

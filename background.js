@@ -14,7 +14,6 @@ browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   }
 });
 
-
 /***** OPTIONS ****/
 function defaultOptions() {
   browser.storage.local.get('api-key').then((res) => {

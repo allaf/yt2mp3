@@ -26,17 +26,16 @@ browser.tabs.query({currentWindow: true, active: true})
       var context = rootContext;
 
       browser.storage.local.get('api-key').then((apiKey) => {
+        if (!!!apiKey['api-key']) {
+          loading.innerHTML = "Please enter you API KEY in the addons settings !";
+          return;
+        }
         context.fetchVideo(url, apiKey['api-key']).then(json => {
           var loading = document.querySelector('#loading');
-          if (apiKey['api-key'] === undefined) {
-            loading.innerHTML = "Please enter you API KEY in the addons setting !";
-            return;
-          }
-
           loading.parentNode.removeChild(loading);
           json.streams.forEach(function (elt, index) {
-            var filename = json.title + elt.format + '.' + elt.extension;
-            context.addLinkTo(elt, 'link_' + index, filename);
+            var filename = json.title + '_' + elt.format + '.' + elt.extension;
+            context.addLinkTo(elt, 'link_' + index, filename.replace(/"/g,''));
           });
         });
       });

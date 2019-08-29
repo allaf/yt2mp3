@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "downlod youtube video with rapidapi.com",
+  "name": "download youtube video with rapidapi.com",
   "version": "0.5.1",
   "description": "Download and convert youtube videos with getvideo.p.rapidapi.com",
   "applications": {

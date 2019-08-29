@@ -9,7 +9,7 @@ var saveOptions = function (e) {
 
 var restoreOptions = function () {
   browser.storage.local.get('api-key').then((res) => {
-    document.querySelector('#api-key').value = res['api-key'];
+    document.querySelector('#api-key').value = res['api-key'].trim();
   });
 }
 
